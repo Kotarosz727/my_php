@@ -1,0 +1,8 @@
+version: "3.9"
+services:
+  app:
+    build: .
+    volumes:
+      - ./src:/src
+    # コンテナを起動し続ける
+    tty: true  
