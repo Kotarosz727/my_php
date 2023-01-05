@@ -3,6 +3,6 @@ services:
   app:
     build: .
     volumes:
-      - ./src:/src
+      - ./:/app
     # コンテナを起動し続ける
     tty: true  
