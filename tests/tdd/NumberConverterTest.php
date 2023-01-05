@@ -4,23 +4,48 @@
 
 use PHPUnit\Framework\TestCase;
 use FizzBuzz\NumberConverter;
+use FizzBuzz\ReplaceRuleInterface;
 
 class NumberConverterTest extends TestCase
 {
-    public function testConvert()
+    public function testConvertWithEmptyRules()
     {
-        $converter = new NumberConverter();
-        
-        $this->assertEquals("1", $converter->convert(1));
-        $this->assertEquals("2", $converter->convert(2));
-        $this->assertEquals("Fizz", $converter->convert(3));
-        $this->assertEquals("Buzz", $converter->convert(5));
-        $this->assertEquals("FizzBuzz", $converter->convert(15));
-        $this->assertEquals("Fizz", $converter->convert(6));
-        $this->assertEquals("Buzz", $converter->convert(10));
-        $this->assertEquals("FizzBuzz", $converter->convert(30));
+        $converter = new NumberConverter([]);
 
-        $this->expectException(OutOfRangeException::class);
-        $this->assertEquals("0", $converter->convert(0));
+        $this->assertEquals("", $converter->convert(1));
+    }
+
+    public function testConvertWithSingleRule()
+    {
+        $rule = $this->createReplaceRule(1, 'Replaced');
+
+        $converter = new NumberConverter([$rule]);
+
+        $this->assertEquals("Replaced", $converter->convert(1));
+    }
+
+    public function testConvertWithMultipleRules()
+    {
+        $rules = [
+            $this->createReplaceRule(1, ''),
+            $this->createReplaceRule(1, ''),
+            $this->createReplaceRule(1, '1'),
+        ];
+
+        $converter = new NumberConverter($rules);
+
+        $this->assertEquals("1", $converter->convert(1));
+    }
+
+    private function createReplaceRule(int $n, string $replaced): ReplaceRuleInterface
+    {
+        $rule = $rule = $this->createMock(ReplaceRuleInterface::class);
+        
+        $rule->expects($this->atLeastOnce())
+            ->method('replace')
+            ->with($n)
+            ->willReturn($replaced);
+
+        return $rule;    
     }
 }
