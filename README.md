@@ -3,5 +3,7 @@
 ```
 docker compose build
 
-docker compose run app
+docker compose up
+
+docker compose exec app vendor/bin/phpunit tests
 ```
