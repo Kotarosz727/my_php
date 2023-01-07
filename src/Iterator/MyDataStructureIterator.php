@@ -4,7 +4,8 @@ class MyDataStructureIterator implements Iterator
 {
 	private $position = 0;
 
-    function __construct(protected Traversable $iterator, $class = null) {
+    function __construct(protected Traversable $iterator) {
+        $this->position = 0;
     }
 
     public function rewind(): void {
