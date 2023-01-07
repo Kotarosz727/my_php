@@ -2,7 +2,7 @@
 
 class EvenFilterIterator extends FilterIterator
 {
-    public function accept()
+    public function accept(): bool
     {
         $iterator = $this->getInnerIterator();
 
