@@ -4,7 +4,8 @@
     },
     "autoload":{
         "psr-4": {
-            "FizzBuzz\\":"src/Tdd/"
+            "FizzBuzz\\":"src/Tdd/",
+            "State\\":"src/State"
         }
     },
     "autoload-dev":{

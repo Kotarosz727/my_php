@@ -1,5 +1,8 @@
 <?php
 
+namespace State;
+
+require_once "vendor/autoload.php";
 class SpeedMeter
 {
     protected $speed = 0;
@@ -17,7 +20,7 @@ class SpeedMeter
 
     public function display(): void
     {
-        echo $this->speed . 'km' . $this->speedState->getColor();  
+        echo $this->speed . 'km ' . $this->speedState->getColor(). PHP_EOL;  
     }
 }
 

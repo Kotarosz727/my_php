@@ -1,10 +1,12 @@
 <?php
 
+namespace State;
+
 use function PHPUnit\Framework\isNull;
 
 trait Singleton
 {
-    private ?self $instance = null;
+    private static ?self $instance = null;
 
     public static function getInstance(): self
     {
